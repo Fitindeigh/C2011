@@ -1,0 +1,91 @@
+// C++ code
+//
+
+
+void setup()
+{
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(13, OUTPUT);
+  
+  pinMode(7, INPUT);
+  
+  Serial.begin(9600);
+  Serial.println("Hello World!");
+  int a;
+  a = 10;
+  Serial.print(a);
+}
+
+int Button = 0;
+int flag = 0;
+int Button_press = 0;
+int random_num;
+
+void loop()
+{
+  Button = digitalRead(7);
+  //Serial.println(Button); кнопка опрашивается
+  // постоянно
+  // Обработчик кнопки
+  
+  if (Button && !flag){
+    flag = 1;
+    Button_press = 1;
+  }
+  
+  if (!Button && flag){
+    flag = 0;
+  }   
+  // далее в программе используем Button_press как
+  // индикатор нажатия кнопки
+  if (Button_press == 1){
+    Serial.println(Button_press);
+    Serial.println(random_num);
+    Button_press = 0;
+    // выполняем код      
+      digitalWrite(8, LOW);
+      digitalWrite(9, LOW);
+      digitalWrite(10, LOW);
+      digitalWrite(11, LOW);
+      digitalWrite(12, LOW);
+      digitalWrite(13, LOW);
+    random_num = random(8, 13+1);
+    if (random_num == 8){
+      digitalWrite(8, HIGH);
+    }
+    if (random_num == 9){
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+    }
+    if (random_num == 10){
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(10, HIGH);
+    }
+    if (random_num == 11){
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(10, HIGH);
+      digitalWrite(11, HIGH);
+    }
+     if (random_num == 12){
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(10, HIGH);
+      digitalWrite(11, HIGH);
+      digitalWrite(12, HIGH);
+    }
+    if (random_num == 13){
+      digitalWrite(8, HIGH);
+      digitalWrite(9, HIGH);
+      digitalWrite(10, HIGH);
+      digitalWrite(11, HIGH);
+      digitalWrite(12, HIGH);
+      digitalWrite(13, HIGH);
+    }
+    
+  }}
