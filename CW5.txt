@@ -1,0 +1,100 @@
+#define but_1_pin 2
+#define but_2_pin 13
+#define led_1_pin 3
+#define led_2_pin 12
+#define buzz 7
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(but_1_pin, INPUT_PULLUP);
+  pinMode(but_2_pin, INPUT_PULLUP);
+
+  pinMode(led_1_pin, OUTPUT);
+  pinMode(led_2_pin, OUTPUT);
+
+  pinMode(buzz, OUTPUT);
+}
+
+int Button_1 = 0;
+int flag_1 = 0;
+int Button_press_1 = 0;
+
+int Button_2 = 0;
+int flag_2 = 0;
+int Button_press_2 = 0;
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  delay(random(3000, 10000+1)); // останавливаем программу от 3 до 10 секунд
+
+  digitalWrite(buzz, HIGH);
+  delay(10);
+  digitalWrite(buzz, LOW);
+
+  while(1){
+    Button_1 = !digitalRead(but_1_pin);
+    Button_2 = !digitalRead(but_2_pin);
+
+    if (Button_1 && !flag_1){
+      flag_1 = 1;
+      Button_press_1 = 1;   // индикатор нажатия 1 кнопки
+      }
+    if (!Button_1 && flag_1){
+        flag_1 = 0;
+      }
+
+    if (Button_2 && !flag_2){
+      flag_2 = 1;
+      Button_press_2 = 1;   // индикатор нажатия 2 кнопки
+      }
+    if (!Button_2 && flag_2){
+        flag_2 = 0;
+      }
+    
+    if (Button_press_1 == 1){
+      Button_press_1 = 0;
+      digitalWrite(buzz, HIGH);
+      digitalWrite(led_1_pin, HIGH);
+      delay(500);
+      digitalWrite(buzz, LOW);
+      digitalWrite(led_1_pin, LOW);
+      delay(500);
+      digitalWrite(buzz, HIGH);
+      digitalWrite(led_1_pin, HIGH);
+      delay(500);
+      digitalWrite(buzz, LOW);
+      digitalWrite(led_1_pin, LOW);
+      delay(500);
+      digitalWrite(buzz, HIGH);
+      digitalWrite(led_1_pin, HIGH);
+      delay(500);
+      digitalWrite(buzz, LOW);
+      digitalWrite(led_1_pin, LOW);
+      break;
+    }   
+    if (Button_press_2 == 1){
+      Button_press_2 = 0;
+      digitalWrite(buzz, HIGH);
+      digitalWrite(led_2_pin, HIGH);
+      delay(500);
+      digitalWrite(buzz, LOW);
+      digitalWrite(led_2_pin, LOW);
+      delay(500);
+      digitalWrite(buzz, HIGH);
+      digitalWrite(led_2_pin, HIGH);
+      delay(500);
+      digitalWrite(buzz, LOW);
+      digitalWrite(led_2_pin, LOW);
+      delay(500);
+      digitalWrite(buzz, HIGH);
+      digitalWrite(led_2_pin, HIGH);
+      delay(500);
+      digitalWrite(buzz, LOW);
+      digitalWrite(led_2_pin, LOW);
+      break;
+    }       
+     
+
+  }
+
+}
