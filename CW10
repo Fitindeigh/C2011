@@ -1,0 +1,55 @@
+
+#define SEGMENT_A 7   //Segment A
+#define SEGMENT_B 8   //Segment B
+#define SEGMENT_C 9   //Segment C
+#define SEGMENT_D 10  //Segment D
+#define SEGMENT_E 11  //Segment E
+#define SEGMENT_F 12  //Segment F
+#define SEGMENT_G 13  //Segment G
+#define BUTTON_PIN 5
+
+const byte signals[10][7] = {
+  { 0, 0, 0, 0, 0, 0, 1 },  // 0
+  { 1, 0, 0, 1, 1, 1, 1 },  // 1
+  { 0, 0, 1, 0, 0, 1, 0 },  // 2
+  { 0, 0, 0, 0, 1, 1, 0 },  // 3
+  { 1, 0, 0, 1, 1, 0, 0 },  // 4
+  { 0, 1, 0, 0, 1, 0, 0 },  // 5
+  { 0, 1, 0, 0, 0, 0, 0 },  // 6
+  { 0, 0, 0, 1, 1, 1, 1 },  // 7
+  { 0, 0, 0, 0, 0, 0, 0 },  // 8
+  { 0, 0, 0, 0, 1, 0, 0 }   // 9
+};
+
+int segments[7] = {SEGMENT_A, SEGMENT_B, SEGMENT_C,
+ SEGMENT_D, SEGMENT_E, SEGMENT_F,
+ SEGMENT_G
+ };
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(SEGMENT_A, OUTPUT);
+  pinMode(SEGMENT_B, OUTPUT);
+  pinMode(SEGMENT_C, OUTPUT);
+  pinMode(SEGMENT_D, OUTPUT);
+  pinMode(SEGMENT_E, OUTPUT);
+  pinMode(SEGMENT_F, OUTPUT);
+  pinMode(SEGMENT_G, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+}
+
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if (digitalRead(BUTTON_PIN)) {
+    for (int digit = 9; digit >= 0; digit--) {
+      for (int segment = 0; segment < 7; segment++) {
+        Serial.print(signals[digit][segment]);
+        digitalWrite(segments[segment],
+                     signals[digit][segment]);
+      }
+      Serial.println();
+      delay(1000);
+    }
+  }
+}
